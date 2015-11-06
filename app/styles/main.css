@@ -1,0 +1,21 @@
+#dose-algorithm {
+    margin-top: 40px;
+}
+
+#dose-algorithm:before {
+    content: "Dose Calculation";
+}
+
+.input-group {
+    width: 600px;
+    height: 30px;
+    margin: 20px;
+}
+
+.input-group label {
+    float: left;
+}
+
+.input-group input {
+    float: right
+}

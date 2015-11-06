@@ -1,0 +1,58 @@
+<input id="firstNumber" ng-model="main.numbers.first">
+<input id="secondNumber" ng-model="main.numbers.second">
+<div>{{main.result}}</div>
+<button ng-click="main.triggerAI()">Submit</button>
+
+
+<div id="dose-algorithm">
+    <div class="input-group">
+        <label for="age">Age (Max 75 years)</label>
+        <input id="age" ng-model="main.age">
+    </div>
+
+    <div class="input-group">
+        <label for="height">Height (Max 215 cm)</label>
+        <input id="height" ng-model="main.height">
+    </div>
+
+    <div class="input-group">
+        <label for="weight">Weight (Max 135 kg)</label>
+        <input id="weight" ng-model="main.weight">
+    </div>
+
+    <div class="input-group">
+        <label for="is-black">Black? (0 for no, 1 for yes)</label>
+        <input id="is-black" ng-model="main.isBlack">
+    </div>
+
+    <div class="input-group">
+        <label for="is-smoker">Smoker? (0 for no, 1 for yes)</label>
+        <input id="is-smoker" ng-model="main.isSmoker">
+    </div>
+
+    <div class="input-group">
+        <label for="is-dvt-pe">Deep Vein Thrombosis or Pulminary Embolism? (0 for no, 1 for yes)</label>
+        <input id="is-dvt-pe" ng-model="main.isDvtPe">
+    </div>
+
+    <div class="input-group">
+        <label for="is-using-amiodarone">Using Amiodarone? (0 for no, 1 for yes)</label>
+        <input id="is-using-amiodarone" ng-model="main.isUsingAmiodarone">
+    </div>
+
+    <div class="input-group">
+        <button ng-click="main.trainAIForInitialDose()">Train AI</button>
+    </div>
+
+    <div class="input-group">
+        <button ng-click="main.calculateAlgorithmDose()">Calculate Algorithm Dose</button>
+    </div>
+
+    <div class="input-group">
+        <button ng-click="main.calculateAIDose()">Calculate AI Dose</button>
+    </div>
+
+    <div id="algorithm-result">Algorithm Result: {{main.algorithmDose}}</div>
+    <div id="ai-result">AI Raw Result: {{main.aiDose}}</div>
+    <div id="ai-result-lookup">AI Result Dose Lookup: {{main.aiDoseLookup}}</div>
+</div>
