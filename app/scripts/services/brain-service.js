@@ -10,7 +10,7 @@
 angular.module('bmrAiApp')
     .service('brainService', function (algorithmService) {
         var bmrAI = new brain.NeuralNetwork({
-            hiddenLayers: [2, 4, 7]
+            hiddenLayers: [4, 4]
         });
 
         return {
