@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name doseAiApp.controller:AboutCtrl
+ * @name bmrAiApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the doseAiApp
+ * Controller of the bmrAiApp
  */
-angular.module('doseAiApp')
+angular.module('bmrAiApp')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name doseAiApp
+ * @name bmrAiApp
  * @description
- * # doseAiApp
+ * # bmrAiApp
  *
  * Main module of the application.
  */
 angular
-  .module('doseAiApp', [
+  .module('bmrAiApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

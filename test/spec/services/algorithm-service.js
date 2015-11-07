@@ -3,7 +3,7 @@
 describe('Service: algorithmService', function () {
 
   // load the service's module
-  beforeEach(module('doseAiApp'));
+  beforeEach(module('bmrAiApp'));
 
   // instantiate service
   var algorithmService;

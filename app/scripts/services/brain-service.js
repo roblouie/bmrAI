@@ -2,92 +2,67 @@
 
 /**
  * @ngdoc service
- * @name doseAiApp.brainService
+ * @name bmrAiApp.brainService
  * @description
  * # brainService
- * Service in the doseAiApp.
+ * Service in the bmrAiApp.
  */
-angular.module('doseAiApp')
+angular.module('bmrAiApp')
     .service('brainService', function (algorithmService) {
-        var initialDoseAI = new brain.NeuralNetwork({
-            hiddenLayers: [2, 7],
-            learningRate: 0.6
+        var bmrAI = new brain.NeuralNetwork({
+            hiddenLayers: [2, 4, 7]
         });
-        initialDoseAI.fromJSON(loadBrain());
+        //initialBmrAI.fromJSON(loadBrain());
 
         return {
-            sampleXorAI: sampleXorAI,
-            trainAIForInitialDose: trainAIForInitialDose,
-            calculateInitialDose: calculateInitialDose
+            trainAIForBmr: trainAIForBmr,
+            calculateBmr: calculateBmr
         };
 
-        function sampleXorAI(numbers) {
-            var net = new brain.NeuralNetwork();
-
-            var xor = [
-                { input: [0, 0], output: [0]},
-                { input: [0, 1], output: [1]},
-                { input: [1, 0], output: [1]},
-                { input: [1, 1], output: [0]}];
-
-            net.train(xor);
-
-            return net.run(numbers);
-        }
-
-        function calculateInitialDose(age, isBlack, isSmoker, height, weight, isDvtPe, isUsingAmiodarone) {
-            return initialDoseAI.run({
+        function calculateBmr(weight, height, age, isMale) {
+            return bmrAI.run({
                 age: transformAgeToFraction(age),
                 height: transformHeightToFraction(height),
                 weight: transformWeightToFraction(weight),
-                isBlack: isBlack,
-                isSmoker: isSmoker,
-                isDvtPe: isDvtPe,
-                isUsingAmiodarone: isUsingAmiodarone
-            });
+                isMale: isMale
+            }).bmr;
         }
 
-        function trainAIForInitialDose() {
+        function trainAIForBmr() {
             var options = {
-                errorThresh: 0.0001,  // error threshold to reach
+                errorThresh: 0.00001,  // error threshold to reach
                 iterations: 20000,   // maximum training iterations
                 log: true,           // console.log() progress periodically
-                logPeriod: 100,       // number of iterations between logging
-                learningRate: 0.2    // learning rate
+                logPeriod: 50,       // number of iterations between logging
+                learningRate: 0.3    // learning rate
             };
 
             var data = buildTestData();
 
-            initialDoseAI.train(data, options);
+            bmrAI.train(data, options);
         }
 
         function buildTestData() {
-            var patientDataList = [];
+            var personDataList = [];
 
-            for (var i = 0; i < 30000; i ++) {
+            for (var i = 0; i < 20000; i ++) {
                 var age = getRandomNumberAndBetweenOneAndZero(18, 75);
                 var height = getRandomNumberAndBetweenOneAndZero(120, 215);
                 var weight = getRandomNumberAndBetweenOneAndZero(45, 135);
-                var isBlack = getZeroOrOne();
-                var isSmoker = getZeroOrOne();
-                var isDvtPe = getZeroOrOne();
-                var isUsingAmiodarone = getZeroOrOne();
+                var isMale = getZeroOrOne();
 
-                patientDataList.push({
+                personDataList.push({
                     input: {
                         age: age.betweenZeroAndOne,
                         height: height.betweenZeroAndOne,
                         weight: weight.betweenZeroAndOne,
-                        isBlack: isBlack,
-                        isSmoker: isSmoker,
-                        isDvtPe: isDvtPe,
-                        isUsingAmiodarone: isUsingAmiodarone
+                        isMale: isMale
                     },
-                    output: {dose: (algorithmService.calculateInitialDose(age.originalNumber, isBlack, isSmoker, height.originalNumber, weight.originalNumber, isDvtPe, isUsingAmiodarone) / 25)}
+                    output: {bmr: (algorithmService.calculateBasalMetabolicRate(weight.originalNumber, height.originalNumber, age.originalNumber, isMale) / 2324)}
                 });
             }
 
-            return patientDataList;
+            return personDataList;
         }
 
         function transformHeightToFraction(height) {
